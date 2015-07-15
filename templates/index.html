@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--4-col">4</div>
+    <div class="mdl-cell mdl-cell--4-col">
+        <form action="{{ url_for('check')}}" method='post'>
+            <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                <input class="mdl-textfield__input" type="text" name="email" id="email" />
+                <label class="mdl-textfield__label" for="sample1">Mozilla Backpack Email</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                <input class="mdl-textfield__input" type="text" name="handle" id="handle" />
+                <label class="mdl-textfield__label" for="sample1">Twitter Handle</label>
+            </div>
+            <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--4-col"></div>
+                <div class="mdl-cell mdl-cell--4-col">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                    Badge ME!
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="mdl-cell mdl-cell--4-col">4</div>
+</div>
+
+<a class="btn btn-primary"  href="{{ url_for('static', filename='issuer.json')}}" role="button">json</a>
+
+<a class="btn btn-primary"  href="{{ url_for('static', filename='badges/Badge.png')}}" role="button">json</a>
+{% endblock %}
+
+
