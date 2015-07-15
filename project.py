@@ -1,10 +1,7 @@
 import sys
 import os
 from flask import Flask, render_template, Markup, request, redirect, url_for
-from geopy.geocoders import Nominatim
 import logging
-import pyrebase
-import time
 
 # App Config
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

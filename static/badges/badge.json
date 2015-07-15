@@ -2,6 +2,6 @@
     "name": "Rookie Badge Issuer",
     "description": "Issues great new Open Badges to self.",
     "image": "http://yoursite.com/rookie-badge-issuer.png",
-    "criteria": "http://yoursite.com/rookie-badge-criteria.html",
-    "issuer": "http://yoursite.com/badge-issuer.json"
+    "criteria": "https://badged.herokuapp.com/rookie-badge-criteria.html",
+    "issuer": "https://badged.herokuapp.com/static/badge-issuer.json"
 }
