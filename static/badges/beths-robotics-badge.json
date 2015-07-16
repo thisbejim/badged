@@ -1,12 +1,1 @@
-{"uid": "abcdefghijklm1234567898765",
-        "recipient": {
-            "identity": "jimmy_cm3@hotmail.com",
-            "type": "email",
-            "hashed": false
-        },
-        "badge": "https://badged.herokuapp.com/static/badges/badge.json",
-        "verify": {
-            "url": "https://badged.herokuapp.com/static/badges/beths-robotics-badge.json",
-            "type": "hosted"
-        },
-        "issuedOn": 1403120715}
+{ "uid": "URX3JU","recipient":{ "identity": "jimmy_cm3@hotmail.com","type": "email","hashed": false },"badge": "https://badged.herokuapp.com/static/badges/badge.json","verify": { "url": "https://badged.herokuapp.com/static/badges/beths-robotics-badge.json","type": "hosted"},"issuedOn": 1437013972 }
