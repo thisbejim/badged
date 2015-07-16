@@ -7,11 +7,11 @@
         <form action="{{ url_for('award')}}" method='post'>
             <div class="mdl-textfield mdl-js-textfield textfield-demo">
                 <input class="mdl-textfield__input" type="text" name="email" id="email" />
-                <label class="mdl-textfield__label" for="sample1">Mozilla Backpack Email</label>
+                <label class="mdl-textfield__label" for="email">Mozilla Backpack Email</label>
             </div>
             <div class="mdl-textfield mdl-js-textfield textfield-demo">
                 <input class="mdl-textfield__input" type="text" name="handle" id="handle" />
-                <label class="mdl-textfield__label" for="sample1">Twitter Handle</label>
+                <label class="mdl-textfield__label" for="handle">Twitter Handle</label>
             </div>
             <div class="mdl-grid">
                 <div class="mdl-cell mdl-cell--4-col"></div>
@@ -31,6 +31,7 @@
 <a class="btn btn-primary"  href="{{ url_for('static', filename='badges/Badge.png')}}" role="button">json</a>
 
 <a class="btn btn-primary"  href="{{ url_for('static', filename='private-key.pem')}}" role="button">json</a>
+
 {% endblock %}
 
 

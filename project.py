@@ -42,28 +42,38 @@ def index():
 @app.route('/award', methods=['GET', 'POST'])
 def award():
     if request.method == 'POST':
-            print(request.form['email'])
-            print(request.form['handle'])
-            time_now = time.time() * 1000
+            time_now = time.time()
             time_now = int(time_now)
             assertion = '"uid": "{0}",' \
-                        '"recipient":{1} "identity": "{2}","type": "email","hashed": False {3},' \
+                        '"recipient":{1} ' \
+                        '"identity": "{2}",' \
+                        '"type": "email",' \
+                        '"hashed": false ' \
+                        '{3},' \
                         '"badge": "https://badged.herokuapp.com/static/badges/badge.json",' \
-                        '"verify": {4} "url": "https://badged.herokuapp.com/static/public-key.pem","type": "signed"{5},' \
+                        '"verify": {4} ' \
+                        '"url": "https://badged.herokuapp.com/static/public-key.pem",' \
+                        '"type": "signed"' \
+                        '{5},' \
                         '"issuedOn": {6}'.format(id_generator(), '{',  request.form['email'], '}', '{', '}', time_now)
 
-            assertion = '{'+assertion+'}'
+            assertion = '{ '+assertion+' }'
             print(assertion)
             with open('static/private-key.pem', 'r') as rsa_file:
                 priv_key = rsa_file.read()
-            encoded = jwt.encode({'some': '{'+assertion+'}'}, priv_key, algorithm='RS256')
+            print(priv_key)
+            encoded = jwt.encode({'assertion': assertion}, priv_key, algorithm='RS256',
+                                 headers={'alg': 'RS256'})
 
-            print(encoded )
+            print(encoded)
+            with open('static/public-key.pem', 'r') as rsa_file:
+                priv_key = rsa_file.read()
+            decoded = jwt.decode(encoded, priv_key, algorithm=['RS256'])
+            print(decoded)
             return redirect(url_for('index'))
 
     # get new articles
     return render_template('check.html')
-
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
