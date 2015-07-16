@@ -2,36 +2,48 @@
 
 {% block content %}
 <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--4-col">4</div>
-    <div class="mdl-cell mdl-cell--4-col">
-        <form action="{{ url_for('award')}}" method='post'>
-            <div class="mdl-textfield mdl-js-textfield textfield-demo">
+    <div class="mdl-cell mdl-cell--4-col"></div>
+    <div class="mdl-cell mdl-cell--3-col">
+            <div class="mdl-textfield mdl-js-textfield form">
                 <input class="mdl-textfield__input" type="text" name="email" id="email" />
                 <label class="mdl-textfield__label" for="email">Mozilla Backpack Email</label>
             </div>
-            <div class="mdl-textfield mdl-js-textfield textfield-demo">
+            <div class="mdl-textfield mdl-js-textfield form">
                 <input class="mdl-textfield__input" type="text" name="handle" id="handle" />
                 <label class="mdl-textfield__label" for="handle">Twitter Handle</label>
             </div>
             <div class="mdl-grid">
-                <div class="mdl-cell mdl-cell--4-col"></div>
+                <div class="mdl-cell mdl-cell--8-col">
+                </div>
                 <div class="mdl-cell mdl-cell--4-col">
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                    Badge ME!
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="check()">
+                        Badge ME!
                     </button>
                 </div>
             </div>
-        </form>
+            <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate progress-demo progress"></div>
+        </div>
     </div>
-    <div class="mdl-cell mdl-cell--4-col">4</div>
+    <div class="mdl-cell mdl-cell--4-col"></div>
 </div>
 
-<a class="btn btn-primary"  href="{{ url_for('static', filename='issuer.json')}}" role="button">json</a>
+<script>
 
-<a class="btn btn-primary"  href="{{ url_for('static', filename='badges/Badge.png')}}" role="button">json</a>
+function check() {
+    document.getElementById('p2').style.display='block';
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("POST","/check",true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xmlhttp.send('email='+document.getElementById('email').value+'&handle='+document.getElementById('handle').value);
 
-<a class="btn btn-primary"  href="{{ url_for('static', filename='private-key.pem')}}" role="button">json</a>
+    xmlhttp.onreadystatechange=function(){
+        if (xmlhttp.readyState==4 && xmlhttp.status==200){
+        console.log(xmlhttp.responseText);
+        document.getElementById('p2').style.display='none';
+    }
+  }
+}
+</script>
 
 {% endblock %}
-
 
