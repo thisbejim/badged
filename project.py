@@ -2,7 +2,10 @@ import sys
 import os
 from flask import Flask, render_template, Markup, request, redirect, url_for
 import logging
-
+import string
+import random
+import jwt
+import time
 # App Config
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = 'static/uploads/'
@@ -26,22 +29,41 @@ app.config['SITE'] = "http://0.0.0.0:5000/"
 app.config['DEBUG'] = True
 
 
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+
+
 # List all assets
 @app.route('/')
 def index():
 
-    # get new articles
     return render_template('index.html')
 
-@app.route('/check', methods=['GET', 'POST'])
-def check():
+@app.route('/award', methods=['GET', 'POST'])
+def award():
     if request.method == 'POST':
             print(request.form['email'])
             print(request.form['handle'])
+            time_now = time.time() * 1000
+            time_now = int(time_now)
+            assertion = '"uid": "{0}",' \
+                        '"recipient":{1} "identity": "{2}","type": "email","hashed": False {3},' \
+                        '"badge": "https://badged.herokuapp.com/static/badges/badge.json",' \
+                        '"verify": {4} "url": "https://badged.herokuapp.com/static/public-key.pem","type": "signed"{5},' \
+                        '"issuedOn": {6}'.format(id_generator(), '{',  request.form['email'], '}', '{', '}', time_now)
+
+            assertion = '{'+assertion+'}'
+            print(assertion)
+            with open('static/private-key.pem', 'r') as rsa_file:
+                priv_key = rsa_file.read()
+            encoded = jwt.encode({'some': '{'+assertion+'}'}, priv_key, algorithm='RS256')
+
+            print(encoded )
             return redirect(url_for('index'))
 
     # get new articles
     return render_template('check.html')
+
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
