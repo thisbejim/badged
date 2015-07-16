@@ -1,6 +1,7 @@
 import sys
 import os
-from flask import Flask, render_template, Markup, request, redirect, url_for
+from flask import Flask, render_template, Markup, request, redirect, url_for, jsonify
+import json
 import logging
 import string
 import random
@@ -44,25 +45,16 @@ def award():
     if request.method == 'POST':
             time_now = time.time()
             time_now = int(time_now)
-            assertion = '"uid": "{0}",' \
-                        '"recipient":{1} ' \
-                        '"identity": "{2}",' \
-                        '"type": "email",' \
-                        '"hashed": false ' \
-                        '{3},' \
-                        '"badge": "https://badged.herokuapp.com/static/badges/badge.json",' \
-                        '"verify": {4} ' \
-                        '"url": "https://badged.herokuapp.com/static/public-key.pem",' \
-                        '"type": "signed"' \
-                        '{5},' \
-                        '"issuedOn": {6}'.format(id_generator(), '{',  request.form['email'], '}', '{', '}', time_now)
 
-            assertion = '{ '+assertion+' }'
-            print(assertion)
+            assertion = {"uid": id_generator(),
+                         "recipient": {"identity":request.form['email'],"type":"email", "hashed": False},
+                         "badge": "https://badged.herokuapp.com/static/badges/badge.json",
+                         "verify": {"url": "https://badged.herokuapp.com/static/public-key.pem", "type": "signed"},
+                         "issuedOn": time_now}
+
             with open('static/private-key.pem', 'r') as rsa_file:
                 priv_key = rsa_file.read()
-            print(priv_key)
-            encoded = jwt.encode({'assertion': assertion}, priv_key, algorithm='RS256',
+            encoded = jwt.encode(assertion, priv_key, algorithm='RS256',
                                  headers={'alg': 'RS256'})
 
             print(encoded)
