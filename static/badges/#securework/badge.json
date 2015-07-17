@@ -1,0 +1,7 @@
+{
+    "name": "Rookie Badge Issuer",
+    "description": "Issues great new Open Badges to self.",
+    "image": "https://badged.herokuapp.com/static/badges/Badge.png",
+    "criteria": "https://badged.herokuapp.com/",
+    "issuer": "https://badged.herokuapp.com/static/issuer.json"
+}

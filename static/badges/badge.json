@@ -1,7 +1,7 @@
 {
-    "name": "Rookie Badge Issuer",
-    "description": "Issues great new Open Badges to self.",
-    "image": "https://badged.herokuapp.com/static/badges/Badge.png",
+    "name": "#securework discussion badge",
+    "description": "For engaging in the discussion of secure working conditions.",
+    "image": "https://badged.herokuapp.com/static/badges/#securework/#securework.png",
     "criteria": "https://badged.herokuapp.com/",
     "issuer": "https://badged.herokuapp.com/static/issuer.json"
 }
