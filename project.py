@@ -84,37 +84,37 @@ def check():
             for status in tweepy.Cursor(api.user_timeline, user_id=request.form['handle']).items(400):
                 if "#tech" in status.text:
                     badge = {}
-                    badge["img"] = "badges/#securework/#securework.png"
+                    badge["img"] = "badges/securework/securework.png"
                     badge["assertion"] = build_assertion(request.form['email'],
-                                         "https://badged.herokuapp.com/static/badges/#securework/badge.json")
+                                         "https://badged.herokuapp.com/static/badges/securework/badge.json")
                     badge["tweet"] = status.text
                     assertions.append(badge)
                 if "#javascript" in status.text:
                     badge = {}
-                    badge["img"] = "badges/#highered/#highered.png"
+                    badge["img"] = "badges/highered/highered.png"
                     badge["assertion"] = build_assertion(request.form['email'],
-                                         "https://badged.herokuapp.com/static/badges/#highered/badge.json")
+                                         "https://badged.herokuapp.com/static/badges/highered/badge.json")
                     badge["tweet"] = status.text
                     assertions.append(badge)
                 if "#rpl" in status.text:
                     badge = {}
-                    badge["img"] = "badges/#rpl/#rpl.png"
+                    badge["img"] = "badges/rpl/rpl.png"
                     badge["assertion"] = build_assertion(request.form['email'],
-                                         "https://badged.herokuapp.com/static/badges/#rpl/badge.json")
+                                         "https://badged.herokuapp.com/static/badges/rpl/badge.json")
                     badge["tweet"] = status.text
                     assertions.append(badge)
                 if "#lifelonglearning" in status.text:
                     badge = {}
-                    badge["img"] = "badges/#lifelonglearning/#lifelonglearning.png"
+                    badge["img"] = "badges/lifelonglearning/lifelonglearning.png"
                     badge["assertion"] = build_assertion(request.form['email'],
-                                         "https://badged.herokuapp.com/static/badges/#lifelonglearning/badge.json")
+                                         "https://badged.herokuapp.com/static/badges/lifelonglearning/badge.json")
                     badge["tweet"] = status.text
                     assertions.append(badge)
                 if "#Auspol" in status.text:
                     badge = {}
-                    badge["img"] = "badges/#Auspol/#Auspol.png"
+                    badge["img"] = "badges/Auspol/Auspol.png"
                     badge["assertion"] = build_assertion(request.form['email'],
-                                         "https://badged.herokuapp.com/static/badges/#Auspol/badge.json")
+                                         "https://badged.herokuapp.com/static/badges/Auspol/badge.json")
                     badge["tweet"] = status.text
                     assertions.append(badge)
 
