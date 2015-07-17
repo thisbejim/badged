@@ -7,8 +7,12 @@
     display: none;
 }
 
-.badge-award {
+.center {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.divider {
+    padding: 15px;
 }

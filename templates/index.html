@@ -3,23 +3,32 @@
 {% block content %}
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--4-col"></div>
-    <div class="mdl-cell mdl-cell--3-col">
-            <div class="mdl-textfield mdl-js-textfield form">
-                <input class="mdl-textfield__input" type="text" name="email" id="email" />
-                <label class="mdl-textfield__label" for="email">Mozilla Backpack Email</label>
+    <div class="mdl-cell mdl-cell--4-col">
+        <div class="mdl-card mdl-shadow--2dp demo-card-wide center">
+            <div class="mdl-card__media">
+                <img class="center" src="{{ url_for('static', filename='badged.png')}}">
             </div>
-            <div class="mdl-textfield mdl-js-textfield form">
-                <input class="mdl-textfield__input" type="text" name="handle" id="handle" />
-                <label class="mdl-textfield__label" for="handle">Twitter Handle</label>
+        
+            <div class="mdl-card__supporting-text">
+                Enter your Mozilla Open Badges Email and your Twitter handle to see if you have earned any badges!
+                <div class="mdl-textfield mdl-js-textfield form">
+                    <input class="mdl-textfield__input" type="text" name="email" id="email" />
+                    <label class="mdl-textfield__label" for="email">Mozilla Backpack Email</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield form">
+                    <input class="mdl-textfield__input" type="text" name="handle" id="handle" />
+                    <label class="mdl-textfield__label" for="handle">Twitter Handle</label>
+                </div>
             </div>
-            <div class="mdl-grid">
-                <div class="mdl-cell mdl-cell--8-col">
-                </div>
-                <div class="mdl-cell mdl-cell--4-col">
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="check()">
-                        Badge ME!
-                    </button>
-                </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="check()">
+                    Badge Me!
+                </a>
+            </div>
+            <div class="mdl-card__menu">
+                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                    <i class="material-icons">share</i>
+                </button>
             </div>
             <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate progress-demo progress"></div>
         </div>

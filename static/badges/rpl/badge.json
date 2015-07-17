@@ -1,7 +1,7 @@
 {
     "name": "#rpl discussion badge",
     "description": "For engaging in the discussion of recognition of prior learning.",
-    "image": "https://badged.herokuapp.com/static/badges/#rpl/#rpl.png",
+    "image": "https://badged.herokuapp.com/static/badges/rpl/rpl.png",
     "criteria": "https://badged.herokuapp.com/",
     "issuer": "https://badged.herokuapp.com/static/issuer.json"
 }
