@@ -77,7 +77,6 @@ def build_assertion(email, badge_url):
     with open('static/private-key.pem', 'r') as rsa_file:
         key = rsa_file.read()
     encoded = jwt.encode(assertion, key, algorithm='RS256', headers={'alg': 'RS256'})
-
     # Check a decode with public key
     with open('static/public-key.pem', 'r') as rsa_file:
         pub_key = rsa_file.read()
@@ -98,7 +97,9 @@ def index():
 def check():
     if request.method == 'POST':
             assertions = []
+            print(request.form['email'])
             for status in tweepy.Cursor(api.user_timeline, user_id=request.form['handle']).items(400):
+
                 if "#tech" in status.text:
                     badge = {}
                     badge["img"] = "badges/securework/securework.png"

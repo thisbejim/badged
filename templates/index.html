@@ -23,8 +23,8 @@
                     <label class="mdl-textfield__label" for="handle">Twitter Handle</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form">
-                    <input class="mdl-textfield__input" type="text" name="email" id="email" />
-                    <label class="mdl-textfield__label" for="email">Mozilla Backpack Email</label>
+                    <input class="mdl-textfield__input" type="text" name="email1" id="email1" />
+                    <label class="mdl-textfield__label" for="email1">Mozilla Backpack Email</label>
                 </div>
                 {% else %}
                 {% endif %}
@@ -69,8 +69,8 @@
                     <label class="mdl-textfield__label" for="handle">Twitter Handle</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form">
-                    <input class="mdl-textfield__input" type="text" name="email" id="email" />
-                    <label class="mdl-textfield__label" for="email">Mozilla Backpack Email</label>
+                    <input class="mdl-textfield__input" type="text" name="email" id="email2" />
+                    <label class="mdl-textfield__label" for="email2">Mozilla Backpack Email</label>
                 </div>
                 {% else %}
                 {% endif %}
@@ -108,7 +108,8 @@ function check() {
 	xmlhttp=new XMLHttpRequest();
 	xmlhttp.open("POST","/check",true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    xmlhttp.send('email='+document.getElementById('email').value+'&handle='+document.getElementById('handle').value);
+    var email = document.getElementById('email1').value == '' ? document.getElementById('email2').value : document.getElementById('email1').value;
+    xmlhttp.send('email='+email+'&handle='+document.getElementById('handle').value);
 
     xmlhttp.onreadystatechange=function(){
         document.getElementById('progress-bar').style.display='none';
