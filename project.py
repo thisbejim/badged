@@ -68,7 +68,7 @@ def build_assertion(email, badge_url):
     time_now = time.time()
     time_now = int(time_now)
     assertion = {"uid": id_generator(),
-                 "recipient": {"identity": email, "type": "email", "hashed": False},
+                 "recipient": {"identity": email.lower(), "type": "email", "hashed": False},
                  "badge": badge_url,
                  "verify": {"url": "https://badged.herokuapp.com/static/public-key.pem", "type": "signed"},
                  "issuedOn": time_now}
