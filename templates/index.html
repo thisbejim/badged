@@ -14,18 +14,31 @@
             </div>
         
             <div class="mdl-card__supporting-text">
-                Enter your Mozilla Open Badges Email and your Twitter handle to see if you have earned any badges!
-                <div class="mdl-textfield mdl-js-textfield form">
-                    <a href="/twitter" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" >
-                    Sign in with Twitter
-                    </a>
+                Sign in with Twitter and enter your Open Badges Email to see if you earn any badges!
+                
+                {% if handle != None %}
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form">
+                    <input class="mdl-textfield__input" type="text" name="handle" id="handle" value="{{handle}}"disabled/>
+                    <label class="mdl-textfield__label" for="handle">Twitter Handle</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form">
                     <input class="mdl-textfield__input" type="text" name="email" id="email" />
                     <label class="mdl-textfield__label" for="email">Mozilla Backpack Email</label>
                 </div>
-                <div class="mdl-textfield mdl-js-textfield form">
-                    <input class="mdl-textfield__input" type="text" name="handle" id="handle" />
+                {% else %}
+                <a href="/twitter" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect center" >
+                    Sign in with Twitter
+                </a>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form">
+                    <input class="mdl-textfield__input" type="text" name="handle" id="handle" disabled/>
                     <label class="mdl-textfield__label" for="handle">Twitter Handle</label>
                 </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form">
+                    <input class="mdl-textfield__input" type="text" name="email" id="email" disabled/>
+                    <label class="mdl-textfield__label" for="email">Mozilla Backpack Email</label>
+                </div>
+                {% endif %}
+                
             </div>
             <div class="mdl-card__actions mdl-card--border">
                 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="check()">
