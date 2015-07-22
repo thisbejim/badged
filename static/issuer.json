@@ -1,4 +1,5 @@
 {
     "name": "Badged",
-    "url": "https://badged.herokuapp.com/"
+    "url": "https://badged.herokuapp.com/",
+    "image": "https://badged.herokuapp.com/static/badge.png"
 }
