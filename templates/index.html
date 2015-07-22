@@ -6,7 +6,39 @@
 </div>
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--4-col mdl-cell--hide-phone"></div>
-    <div class="mdl-cell mdl-cell--4-col mdl-cell--12-col-phone">
+    
+    <div class="mdl-cell mdl-cell--12-col-phone mdl-cell--hide-tablet mdl-cell--hide-desktop">
+        <div class="mdl-card mdl-shadow--2dp card-wide center">
+            <div class="mdl-card__media">
+                <img class="center" src="{{ url_for('static', filename='badge_xxs.png')}}">
+            </div>
+        
+            <div class="mdl-card__supporting-text">
+                Enter your Mozilla Open Badges Email and your Twitter handle to see if you have earned any badges!
+                <div class="mdl-textfield mdl-js-textfield form">
+                    <input class="mdl-textfield__input" type="text" name="email" id="email" />
+                    <label class="mdl-textfield__label" for="email">Mozilla Backpack Email</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield form">
+                    <input class="mdl-textfield__input" type="text" name="handle" id="handle" />
+                    <label class="mdl-textfield__label" for="handle">Twitter Handle</label>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="check()">
+                    Badge Me!
+                </a>
+            </div>
+            <div class="mdl-card__menu">
+                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                    <i class="material-icons">share</i>
+                </button>
+            </div>
+            <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate progress-demo progress"></div>
+        </div>
+    </div>
+    
+    <div class="mdl-cell mdl-cell--4-col mdl-cell--hide-phone mdl-cell--12-col-phone">
         <div class="mdl-card mdl-shadow--2dp card-wide center">
             <div class="mdl-card__media">
                 <img class="center" src="{{ url_for('static', filename='badge.png')}}">
