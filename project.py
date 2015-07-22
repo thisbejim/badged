@@ -9,6 +9,7 @@ import jwt
 import time
 import tweepy
 import requests
+from flask_oauthlib.client import OAuth
 
 # App Config
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -32,8 +33,23 @@ app.logger.setLevel(logging.ERROR)
 app.config['SITE'] = "http://0.0.0.0:5000/"
 app.config['DEBUG'] = True
 
+
 # Setup twitter
 
+# Twitter auth
+oauth = OAuth(app)
+
+twitter = oauth.remote_app(
+    'twitter',
+    consumer_key='9JTAk71PnJSxpPOWMz2vrHhWI',
+    consumer_secret='n1HPcrUAWeCNJzB2CUkc4j3HaakEEpSIhNKZTxX5QkOBp8R8Id',
+    base_url='https://api.twitter.com/1.1/',
+    request_token_url='https://api.twitter.com/oauth/request_token',
+    access_token_url='https://api.twitter.com/oauth/access_token',
+    authorize_url='https://api.twitter.com/oauth/authenticate',
+)
+
+# Tweepy auth
 auth = tweepy.OAuthHandler('9JTAk71PnJSxpPOWMz2vrHhWI', 'n1HPcrUAWeCNJzB2CUkc4j3HaakEEpSIhNKZTxX5QkOBp8R8Id')
 auth.set_access_token('2866308042-wVjYMLidn7KVxrceOc0pqtTD0kZKxzuZ1loswtN', 'FGW5YluRrXn7l12fAwuVcUpwBMKI3C6YshIG7SxF9DlW4')
 api = tweepy.API(auth)
@@ -71,11 +87,14 @@ def build_assertion(email, badge_url):
 
     return encoded.decode("utf-8")
 
-# List all assets
 @app.route('/')
 def index():
+    if 'user_handle' in session:
+        handle = session['user_handle']
+    else:
+        handle = None
+    return render_template('index.html', handle=handle)
 
-    return render_template('index.html')
 
 @app.route('/check', methods=['GET', 'POST'])
 def check():
@@ -119,19 +138,40 @@ def check():
                     assertions.append(badge)
 
             session['assertions'] = assertions
-            print(session['assertions'])
             return "200"
 
     return render_template('check.html')
 
-
+@app.route('/error/')
+def error():
+    return render_template('error.html')
 
 @app.route('/award/')
 def award():
-    print("assertions")
-    print(session['assertions'])
-    lol = session['assertions']
-    return render_template('award.html', assertions=lol)
+    assertions = session['assertions']
+    return render_template('award.html', assertions=assertions)
+
+@app.route('/twitter')
+def twitter_auth():
+    callback_url = url_for('authorized')
+    return twitter.authorize(callback=callback_url)
+
+@twitter.tokengetter
+def get_twitter_token():
+    if 'twitter_oauth' in session:
+        resp = session['twitter_oauth']
+        return resp['oauth_token'], resp['oauth_token_secret']
+
+@app.route('/authorized')
+def authorized():
+    resp = twitter.authorized_response()
+
+    if resp is None:
+        return redirect(url_for('error'))
+
+    session['user_handle'] = resp['screen_name']
+
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
