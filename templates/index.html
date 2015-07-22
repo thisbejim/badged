@@ -10,7 +10,7 @@
     <div class="mdl-cell mdl-cell--12-col-phone mdl-cell--hide-tablet mdl-cell--hide-desktop">
         <div class="mdl-card mdl-shadow--2dp card-wide center">
             <div class="mdl-card__media">
-                <img class="center" src="{{ url_for('static', filename='badge_xxs.png')}}">
+                <img class="center" width="70" height="70" src="{{ url_for('static', filename='badge.png')}}">
             </div>
         
             <div class="mdl-card__supporting-text">
@@ -65,7 +65,7 @@
                     <i class="material-icons">share</i>
                 </button>
             </div>
-            <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate progress-demo progress"></div>
+            <div id="progress-bar" class="mdl-progress mdl-js-progress mdl-progress__indeterminate progress-demo progress"></div>
         </div>
     </div>
     <div class="mdl-cell mdl-cell--4-col"></div>
@@ -74,13 +74,14 @@
 <script>
 
 function check() {
-    document.getElementById('p2').style.display='block';
+    document.getElementById('progress-bar').style.display='block';
 	xmlhttp=new XMLHttpRequest();
 	xmlhttp.open("POST","/check",true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     xmlhttp.send('email='+document.getElementById('email').value+'&handle='+document.getElementById('handle').value);
 
     xmlhttp.onreadystatechange=function(){
+        document.getElementById('progress-bar').style.display='none';
         if (xmlhttp.readyState==4 && xmlhttp.status==200){
         console.log(xmlhttp.responseText);
         window.location.href = '/award';
