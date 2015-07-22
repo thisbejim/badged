@@ -61,11 +61,12 @@
             </div>
         
             <div class="mdl-card__supporting-text">
-                Sign in with Twitter and enter your Open Badges Email to see if you earn any badges!
+                Sign in with Twitter and your Open Badges email to see if you've earned any badges!
                 
                 {% if handle != None %}
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form">
                     <input class="mdl-textfield__input" type="text" name="handle" id="handle" value="{{handle}}"disabled/>
+                    
                     <label class="mdl-textfield__label" for="handle">Twitter Handle</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form">
@@ -73,24 +74,22 @@
                     <label class="mdl-textfield__label" for="email">Mozilla Backpack Email</label>
                 </div>
                 {% else %}
-                <a href="/twitter" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect center" >
-                    Sign in with Twitter
-                </a>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form">
-                    <input class="mdl-textfield__input" type="text" name="handle" id="handle" disabled/>
-                    <label class="mdl-textfield__label" for="handle">Twitter Handle</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label form">
-                    <input class="mdl-textfield__input" type="text" name="email" id="email" disabled/>
-                    <label class="mdl-textfield__label" for="email">Mozilla Backpack Email</label>
-                </div>
                 {% endif %}
                 
             </div>
             <div class="mdl-card__actions mdl-card--border">
+                {% if handle != None %}
                 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="check()">
                     Badge Me!
                 </a>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect align-right" href="/logout">
+                    Logout
+                </a>
+                {% else %}
+                <a href="/twitter" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect center" >
+                    Sign in with Twitter
+                </a>
+                {% endif %}
             </div>
             <div class="mdl-card__menu">
                 <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">

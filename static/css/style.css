@@ -17,6 +17,14 @@
     margin-right: auto;
 }
 
+.align-left {
+    float: left;
+}
+
+.align-right {
+    float: right;
+}
+
 .divider {
     padding: 10px;
 }
