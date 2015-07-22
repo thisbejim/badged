@@ -2,6 +2,9 @@
     width: 100%;
 }
 
+.card-wide {
+    width: 290px;
+}
 .progress {
     width: 100%;
     display: none;
@@ -14,5 +17,5 @@
 }
 
 .divider {
-    padding: 15px;
+    padding: 10px;
 }

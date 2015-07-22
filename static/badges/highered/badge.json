@@ -1,7 +1,7 @@
 {
     "name": "#highered discussion badge",
     "description": "For engaging in the discussion of higher education.",
-    "image": "https://badged.herokuapp.com/static/badges/#highered/highered.png",
+    "image": "https://badged.herokuapp.com/static/badges/highered/highered.png",
     "criteria": "https://badged.herokuapp.com/",
     "issuer": "https://badged.herokuapp.com/static/issuer.json"
 }

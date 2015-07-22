@@ -3,7 +3,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Badged</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/material.min.css')}}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/material.css')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
     <script src="{{ url_for('static', filename='js/material.min.js')}}"></script>
     <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
@@ -17,17 +17,20 @@
       <span class="mdl-layout-title">
          
         </span>
-      <!-- Add spacer, to align navigation to the right -->
-      <div class="mdl-layout-spacer"></div>
-      <!-- Navigation. We hide it in small screens. -->
-      <nav class="mdl-navigation mdl-layout--large-screen-only">
-        <a class="mdl-navigation__link" href="">Badges</a>
-      </nav>
     </div>
   </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Badged</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="">Highered Badge</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+    </nav>
+  </div>
   <main class="mdl-layout__content">
     <div class="page-content">
-        <div class="divider"></div>
+        
         {% block content %}
 
         {% endblock %}
