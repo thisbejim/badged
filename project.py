@@ -1,14 +1,12 @@
 import sys
 import os
-from flask import Flask, render_template, session, request, redirect, url_for, jsonify, Response
-import json
+from flask import Flask, render_template, session, request, redirect, url_for
 import logging
 import string
 import random
 import jwt
 import time
 import tweepy
-import requests
 from flask_oauthlib.client import OAuth
 
 # App Config
