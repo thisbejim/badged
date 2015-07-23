@@ -106,7 +106,7 @@
 function check() {
     document.getElementById('progress-bar').style.display='block';
 	xmlhttp=new XMLHttpRequest();
-	xmlhttp.open("POST","/check",true);
+	xmlhttp.open("POST", "/check", true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     var email = document.getElementById('email1').value == '' ? document.getElementById('email2').value : document.getElementById('email1').value;
     xmlhttp.send('email='+email+'&handle='+document.getElementById('handle').value);

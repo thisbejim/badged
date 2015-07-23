@@ -39,8 +39,8 @@ oauth = OAuth(app)
 
 twitter = oauth.remote_app(
     'twitter',
-    consumer_key='9JTAk71PnJSxpPOWMz2vrHhWI',
-    consumer_secret='n1HPcrUAWeCNJzB2CUkc4j3HaakEEpSIhNKZTxX5QkOBp8R8Id',
+    consumer_key='cnZagtGnF7tdjBa0MS6LRfolp',
+    consumer_secret='EDUP9tHatKeNwKUTQnlOHyscz5kBXyQWyXqkVANZFFxVYoNsx7',
     base_url='https://api.twitter.com/1.1/',
     request_token_url='https://api.twitter.com/oauth/request_token',
     access_token_url='https://api.twitter.com/oauth/access_token',
@@ -48,10 +48,13 @@ twitter = oauth.remote_app(
 )
 
 # Tweepy auth
-auth = tweepy.OAuthHandler('9JTAk71PnJSxpPOWMz2vrHhWI', 'n1HPcrUAWeCNJzB2CUkc4j3HaakEEpSIhNKZTxX5QkOBp8R8Id')
-auth.set_access_token('2866308042-wVjYMLidn7KVxrceOc0pqtTD0kZKxzuZ1loswtN', 'FGW5YluRrXn7l12fAwuVcUpwBMKI3C6YshIG7SxF9DlW4')
+auth = tweepy.OAuthHandler('cnZagtGnF7tdjBa0MS6LRfolp', 'EDUP9tHatKeNwKUTQnlOHyscz5kBXyQWyXqkVANZFFxVYoNsx7')
+auth.set_access_token('3288370520-s3VODM1m5rb7onKwNfGzr0ls3DsLDIA4UCWibmj', 'zls7BCfEtf3YtoxiLAZtrFcKBnS1j5TgryEgcLWLNjwT7')
 api = tweepy.API(auth)
 
+# global
+base_url = "https://badged.herokuapp.com/"
+asset_url = "https://badged.herokuapp.com/static/"
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -84,8 +87,10 @@ def build_assertion(email, badge_url):
 
     return encoded.decode("utf-8")
 
+# routes
 @app.route('/')
 def index():
+    # initial load value
     if 'user_handle' in session:
         handle = session['user_handle']
     else:
@@ -97,9 +102,9 @@ def index():
 def check():
     if request.method == 'POST':
             assertions = []
-            print(request.form['email'])
-            for status in tweepy.Cursor(api.user_timeline, user_id=request.form['handle']).items(400):
-
+            count = 0
+            for status in tweepy.Cursor(api.user_timeline, id=request.form['handle']).items():
+                count += 1
                 if "#tech" in status.text:
                     badge = {}
                     badge["img"] = "badges/securework/securework.png"
@@ -107,6 +112,11 @@ def check():
                                          "https://badged.herokuapp.com/static/badges/securework/badge.json")
                     badge["tweet"] = status.text
                     assertions.append(badge)
+                    try:
+                        new_status = "@{0} just earned the #tech badge. #openbadges #badged".format(request.form['handle'])
+                        api.update_status(status=new_status)
+                    except:
+                        print("Tweet failed: Either duplicate or rate limit.")
                 if "#javascript" in status.text:
                     badge = {}
                     badge["img"] = "badges/highered/highered.png"
@@ -114,6 +124,12 @@ def check():
                                          "https://badged.herokuapp.com/static/badges/highered/badge.json")
                     badge["tweet"] = status.text
                     assertions.append(badge)
+                    try:
+                        new_status = "@{0} just earned the #javascript badge. #openbadges #badged".format(request.form['handle'])
+                        api.update_status(status=new_status)
+                    except Exception as e:
+                        print(e)
+                        print("Tweet failed: Either duplicate or rate limit.")
                 if "#rpl" in status.text:
                     badge = {}
                     badge["img"] = "badges/rpl/rpl.png"
@@ -121,6 +137,11 @@ def check():
                                          "https://badged.herokuapp.com/static/badges/rpl/badge.json")
                     badge["tweet"] = status.text
                     assertions.append(badge)
+                    try:
+                        new_status = "@{0} just earned the #rpl badge. #openbadges #badged".format(request.form['handle'])
+                        api.update_status(status=new_status)
+                    except:
+                        print("Tweet failed: Either duplicate or rate limit.")
                 if "#lifelonglearning" in status.text:
                     badge = {}
                     badge["img"] = "badges/lifelonglearning/lifelonglearning.png"
@@ -128,6 +149,11 @@ def check():
                                          "https://badged.herokuapp.com/static/badges/lifelonglearning/badge.json")
                     badge["tweet"] = status.text
                     assertions.append(badge)
+                    try:
+                        new_status = "@{0} just earned the #lifelonglearning badge. #openbadges #badged".format(request.form['handle'])
+                        api.update_status(status=new_status)
+                    except:
+                        print("Tweet failed: Either duplicate or rate limit.")
                 if "#Auspol" in status.text:
                     badge = {}
                     badge["img"] = "badges/Auspol/Auspol.png"
@@ -135,7 +161,12 @@ def check():
                                          "https://badged.herokuapp.com/static/badges/Auspol/badge.json")
                     badge["tweet"] = status.text
                     assertions.append(badge)
-
+                    try:
+                        new_status = "@{0} just earned the #Auspol badge. #openbadges #badged".format(request.form['handle'])
+                        api.update_status(status=new_status)
+                    except:
+                        print("Tweet failed: Either duplicate or rate limit.")
+            print(count)
             session['assertions'] = assertions
             return "200"
 
