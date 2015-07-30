@@ -56,6 +56,7 @@ api = tweepy.API(auth)
 base_url = "https://badged.herokuapp.com/"
 asset_url = "https://badged.herokuapp.com/static/"
 
+
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
@@ -105,7 +106,7 @@ def check():
             count = 0
             for status in tweepy.Cursor(api.user_timeline, id=request.form['handle']).items():
                 count += 1
-                if "#tech" in status.text:
+                if "#securework" in status.text:
                     badge = {}
                     badge["img"] = "badges/securework/securework.png"
                     badge["assertion"] = build_assertion(request.form['email'],
@@ -113,11 +114,11 @@ def check():
                     badge["tweet"] = status.text
                     assertions.append(badge)
                     try:
-                        new_status = "@{0} just earned the #tech badge. #openbadges #badged".format(request.form['handle'])
+                        new_status = "@{0} just earned the #securework badge. #openbadges #badged".format(request.form['handle'])
                         api.update_status(status=new_status)
                     except:
                         print("Tweet failed: Either duplicate or rate limit.")
-                if "#javascript" in status.text:
+                if "#highered" in status.text:
                     badge = {}
                     badge["img"] = "badges/highered/highered.png"
                     badge["assertion"] = build_assertion(request.form['email'],
@@ -125,7 +126,7 @@ def check():
                     badge["tweet"] = status.text
                     assertions.append(badge)
                     try:
-                        new_status = "@{0} just earned the #javascript badge. #openbadges #badged".format(request.form['handle'])
+                        new_status = "@{0} just earned the #highered badge. #openbadges #badged".format(request.form['handle'])
                         api.update_status(status=new_status)
                     except Exception as e:
                         print(e)
