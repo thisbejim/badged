@@ -57,10 +57,12 @@ base_url = "https://badged.herokuapp.com/"
 asset_url = "https://badged.herokuapp.com/static/"
 
 
+# random id generator for assertions
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
 
+# assertion decoder
 def decode_assertion(assertion):
     with open('static/public-key.pem', 'r') as rsa_file:
         pub_key = rsa_file.read()
@@ -68,8 +70,8 @@ def decode_assertion(assertion):
         return decoded
 
 
+# build assertions
 def build_assertion(email, badge_url):
-    # build assertion
     time_now = int(time.time())
     assertion = {"uid": id_generator(),
                  "recipient": {"identity": email.lower(), "type": "email", "hashed": False},
