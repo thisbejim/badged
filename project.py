@@ -69,8 +69,8 @@ def decode_assertion(assertion):
 
 
 def build_assertion(email, badge_url):
-    time_now = time.time()
-    time_now = int(time_now)
+    # build assertion
+    time_now = int(time.time())
     assertion = {"uid": id_generator(),
                  "recipient": {"identity": email.lower(), "type": "email", "hashed": False},
                  "badge": badge_url,
@@ -81,10 +81,6 @@ def build_assertion(email, badge_url):
     with open('static/private-key.pem', 'r') as rsa_file:
         key = rsa_file.read()
     encoded = jwt.encode(assertion, key, algorithm='RS256', headers={'alg': 'RS256'})
-    # Check a decode with public key
-    with open('static/public-key.pem', 'r') as rsa_file:
-        pub_key = rsa_file.read()
-        decoded = jwt.decode(encoded, pub_key, algorithm=['RS256'])
 
     return encoded.decode("utf-8")
 
@@ -103,9 +99,8 @@ def index():
 def check():
     if request.method == 'POST':
             assertions = []
-            count = 0
+            # check if tweets meet criteria
             for status in tweepy.Cursor(api.user_timeline, id=request.form['handle']).items(100):
-                count += 1
                 if "#securework" in status.text:
                     badge = {}
                     badge["img"] = "badges/securework/securework.png"
@@ -167,7 +162,6 @@ def check():
                         api.update_status(status=new_status)
                     except:
                         print("Tweet failed: Either duplicate or rate limit.")
-            print(count)
             session['assertions'] = assertions
             return "200"
 
