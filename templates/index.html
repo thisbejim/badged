@@ -101,20 +101,32 @@
     <div class="mdl-cell mdl-cell--4-col"></div>
 </div>
 
+<p id="info" class="none mdl-typography--text-center"></p>
+
 <script>
 
 function check() {
     document.getElementById('progress-bar').style.display='block';
+    document.getElementById('info').style.display='block';
+    
 	xmlhttp=new XMLHttpRequest();
 	xmlhttp.open("POST", "/check", true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     var email = document.getElementById('email1').value == '' ? document.getElementById('email2').value : document.getElementById('email1').value;
     xmlhttp.send('email='+email+'&handle='+document.getElementById('handle').value);
-
+    document.getElementById('info').innerHTML='Downloading tweets';
+    setTimeout(function(){
+      document.getElementById('info').innerHTML = "Checking against criteria";
+    }, 2000);
+    setTimeout(function(){
+      document.getElementById('info').innerHTML = "Building badge assertions";
+    }, 4000);
     xmlhttp.onreadystatechange=function(){
-        document.getElementById('progress-bar').style.display='none';
+        document.getElementById('info').innerHTML = "Success!";
         if (xmlhttp.readyState==4 && xmlhttp.status==200){
         console.log(xmlhttp.responseText);
+        document.getElementById('progress-bar').style.display='none';
+        document.getElementById('info').style.display='none';
         window.location.href = '/award';
     }
   }

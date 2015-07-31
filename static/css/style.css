@@ -11,6 +11,10 @@
     display: none;
 }
 
+.none {
+    display: none;
+}
+
 .center {
     display: block;
     margin-left: auto;
