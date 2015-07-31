@@ -104,7 +104,7 @@ def check():
     if request.method == 'POST':
             assertions = []
             count = 0
-            for status in tweepy.Cursor(api.user_timeline, id=request.form['handle']).items():
+            for status in tweepy.Cursor(api.user_timeline, id=request.form['handle']).items(100):
                 count += 1
                 if "#securework" in status.text:
                     badge = {}
@@ -114,7 +114,7 @@ def check():
                     badge["tweet"] = status.text
                     assertions.append(badge)
                     try:
-                        new_status = "@{0} just earned the #securework badge. #openbadges #badged".format(request.form['handle'])
+                        new_status = "@{0} just earned the #securework badge.".format(request.form['handle'])
                         api.update_status(status=new_status)
                     except:
                         print("Tweet failed: Either duplicate or rate limit.")
@@ -126,7 +126,7 @@ def check():
                     badge["tweet"] = status.text
                     assertions.append(badge)
                     try:
-                        new_status = "@{0} just earned the #highered badge. #openbadges #badged".format(request.form['handle'])
+                        new_status = "@{0} just earned the #highered badge.".format(request.form['handle'])
                         api.update_status(status=new_status)
                     except Exception as e:
                         print(e)
@@ -139,7 +139,7 @@ def check():
                     badge["tweet"] = status.text
                     assertions.append(badge)
                     try:
-                        new_status = "@{0} just earned the #rpl badge. #openbadges #badged".format(request.form['handle'])
+                        new_status = "@{0} just earned the #rpl badge.".format(request.form['handle'])
                         api.update_status(status=new_status)
                     except:
                         print("Tweet failed: Either duplicate or rate limit.")
@@ -151,19 +151,19 @@ def check():
                     badge["tweet"] = status.text
                     assertions.append(badge)
                     try:
-                        new_status = "@{0} just earned the #lifelonglearning badge. #openbadges #badged".format(request.form['handle'])
+                        new_status = "@{0} just earned the #lifelonglearning badge.".format(request.form['handle'])
                         api.update_status(status=new_status)
                     except:
                         print("Tweet failed: Either duplicate or rate limit.")
-                if "#Auspol" in status.text:
+                if "#auspol" in status.text:
                     badge = {}
-                    badge["img"] = "badges/Auspol/Auspol.png"
+                    badge["img"] = "badges/auspol/auspol.png"
                     badge["assertion"] = build_assertion(request.form['email'],
-                                         "https://badged.herokuapp.com/static/badges/Auspol/badge.json")
+                                         "https://badged.herokuapp.com/static/badges/auspol/badge.json")
                     badge["tweet"] = status.text
                     assertions.append(badge)
                     try:
-                        new_status = "@{0} just earned the #Auspol badge. #openbadges #badged".format(request.form['handle'])
+                        new_status = "@{0} just earned the #auspol badge.".format(request.form['handle'])
                         api.update_status(status=new_status)
                     except:
                         print("Tweet failed: Either duplicate or rate limit.")
